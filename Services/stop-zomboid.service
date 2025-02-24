@@ -1,0 +1,12 @@
+[Unit]
+Description=Stop Project Zomboid Server
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+ExecStart=/usr/local/bin/stop-zomboid.sh
+User=ubuntu
+
+[Install]
+WantedBy=multi-user.target
