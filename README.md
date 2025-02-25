@@ -35,7 +35,7 @@ python python main.py acess
 Quando precisar parar o servidor, basta executar o script stop-server.py:
 
 ```bash
-python main.py stop
+python main.py stop 
 ```
 Este comando irá desligar o servidor do Project Zomboid e finalizar a instância EC2.
 
