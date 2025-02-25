@@ -4,9 +4,9 @@ import Utils.aws     as AWS
 import Utils.server  as SERVER
 from configs import load_config
 
-def stop_server() -> None:
+def stop_server_and_instnace() -> None:
     """
-    Para a instância EC2.
+    Para o servidor e depois a instância EC2.
     """
     config: dict = load_config()
     ec2: BaseClient = boto3.client("ec2")

@@ -3,9 +3,11 @@ from botocore.client import BaseClient
 import Utils.aws as AWS
 from configs import load_config
 
-def initialize_server() -> None:
+def initialize_instance() -> None:
     """
     Inicializa a instância EC2.
+
+    Usando .service o server do zomboid já inicializado automaticamente com o inicio da instância.
     """
     config: dict = load_config()
     ec2: BaseClient = boto3.client("ec2")
