@@ -15,6 +15,8 @@ def load_config() -> dict:
     config = {
         "INSTANCE_ID": os.getenv("INSTANCE_ID"),
         "KEY_PATH": os.getenv("KEY_PATH"),
+        "INI_LOCAL_PATH": os.getenv("INI_LOCAL_PATH"),
+        "INI_REMOTE_PATH": os.getenv("INI_REMOTE_PATH"),
         "USER": os.getenv("USER", "ubuntu"),
         "STOP_COMMAND": os.getenv("STOP_COMMAND")
     }
