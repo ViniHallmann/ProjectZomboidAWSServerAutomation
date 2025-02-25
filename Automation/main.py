@@ -1,8 +1,9 @@
 import sys
-import Utils.aws     as AWS
-import Utils.server  as SERVER
-from Server_Functions.initialize_server  import initialize_server
-from Server_Functions.stop_server        import stop_server
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from Automation.Server_Functions.initialize_server import initialize_server
+from Automation.Server_Functions.stop_server import stop_server
+
 
 if __name__ == "__main__":
     
