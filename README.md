@@ -20,24 +20,22 @@ pip install -r requirements.txt
 ## **Iniciar o Servidor**
 Para iniciar o servidor, basta rodar o script initialize-server.py:
 ```bash
-python initialize-server.py
+python main.py start
 ```
 Esse comando irá automaticamente iniciar a instância EC2 na AWS e configurar o servidor do Project Zomboid.
 
 ## **Acessar o Servidor**
 Para visualizar a janela do servidor (via screen), use o seguinte comando:
 ```bash
-python access-server.py
+python python main.py acess
 ```
 **Nota**: Este comando ainda não foi implementado.
-
-
 
 ## **Finalizar o Servidor**
 Quando precisar parar o servidor, basta executar o script stop-server.py:
 
 ```bash
-python stop-server.py
+python main.py stop
 ```
 Este comando irá desligar o servidor do Project Zomboid e finalizar a instância EC2.
 
