@@ -47,9 +47,9 @@ Configurar AWS CLI: Após instalar a AWS CLI, execute aws configure e insira as 
 Configurar Variáveis no .env: Crie um arquivo .env na raiz do projeto e adicione as seguintes variáveis:
 
 ```plaintext
-INSTANCE_ID   = <ID da sua instância EC2>
-KEY_PATH      = <Caminho para sua chave .pem>
-USER          = ubuntu
+INSTANCE_ID   = "<ID da sua instância EC2>"
+KEY_PATH      = "<Caminho para sua chave .pem>"
+USER          = "ubuntu"
 STOP_COMMAND  = "sudo systemctl start stop-zomboid.service"
 ACESS_COMMAND = "screen -r zomboid"
 ```
