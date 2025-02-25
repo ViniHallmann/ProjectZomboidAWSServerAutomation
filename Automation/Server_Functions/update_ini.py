@@ -12,6 +12,7 @@ Adicionar o novo servertest.ini na instancia:
     remote_final_path = "/home/ubuntu/Zomboid/Server/servertest.ini"
 """
 import boto3
+from botocore.client import BaseClient
 import Utils.aws     as AWS
 import Utils.server  as SERVER
 from configs import load_config
@@ -23,7 +24,7 @@ def update_ini():
     
     try:
         if not AWS.is_instance_running(ec2, config["INSTANCE_ID"]):
-            print("Instância já está parada.")
+            print("Instância está parada.")
             return
         
         ip: str = AWS.get_instance_ip(ec2, config["INSTANCE_ID"])
@@ -31,8 +32,10 @@ def update_ini():
  
         ssh = SERVER.connect_ssh(ip, config["KEY_PATH"], config["USER"])
         sftp = ssh.open_sftp()
-        sftp.put(local_file_path, remote_temp_path)
-        stdin, stdout, stderr = ssh.exec_command(f"sudo mv {remote_temp_path} {remote_final_path}")
+        
+        sftp.put(config["INI_LOCAL_PATH"], config["INI_REMOTE_PATH"])
+        ssh.exec_command(f'sudo mv {config["INI_REMOTE_PATH"] + "/servertestnew.ini"} {config["INI_REMOTE_PATH"] + "/servertest.ini"}')
+        ssh.exec_command(f'sudo mv {config["INI_REMOTE_PATH"] + "/servertest.ini"} {config["INI_FINAL_PATH"]}')
     except Exception as e:
         print(f"Erro: {e}")
 
