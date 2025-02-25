@@ -19,7 +19,6 @@ def main() -> None:
     if len(sys.argv) < 2:
         print(USAGE_MESSAGE)
         
-    
     command = sys.argv[1].lower()
     
     if command not in COMMANDS:

@@ -51,3 +51,10 @@ USER          = "ubuntu"
 STOP_COMMAND  = "sudo systemctl start stop-zomboid.service"
 ACESS_COMMAND = "screen -r zomboid"
 ```
+
+## **TO-DO**
+1. Backup do save no S3
+2. Retorno do ip do server no discord
+3. Arrumar reset do reveal map toda vez que desloga
+4. Acesso ao terminal do server
+5. Automacao de update do ini
