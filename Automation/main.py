@@ -1,22 +1,37 @@
 import sys
 import os
+
+from typing import Dict, Callable
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Automation.Server_Functions.initialize_server import initialize_server
 from Automation.Server_Functions.stop_server import stop_server
 
+USAGE_MESSAGE = "Uso: python main.py <start>||<stop>"
+UNKNOWN_COMMAND_MESSAGE = "Comando desconhecido: {}"
+COMMANDS: Dict[str, Callable] = {
+    "start": initialize_server,
+    "stop": stop_server,
+}
 
-if __name__ == "__main__":
+def main() -> None:
     
     if len(sys.argv) < 2:
-        print("Uso: python main.py <start>||<stop>")
-        sys.exit(1)
+        print(USAGE_MESSAGE)
+        
     
     command = sys.argv[1].lower()
     
-    if command == "start":
-        initialize_server()
-    elif command == "stop":
-        stop_server()
-    else:
-        print(f"Comando desconhecido: {command}")
-        print("Uso: python main.py <start>||<stop>")
+    if command not in COMMANDS:
+        print(UNKNOWN_COMMAND_MESSAGE.format(command))
+        print(USAGE_MESSAGE)
+        sys.exit(1)
+
+    try:
+        COMMANDS[command]()
+    except Exception as e:
+        print(f"Erro ao executar o comando '{command}': {e}")
+        sys.exit(1) 
+
+if __name__ == "__main__":
+    main()
