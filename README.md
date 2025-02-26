@@ -55,8 +55,5 @@ ACESS_COMMAND = "screen -r zomboid"
 ## **TO-DO**
 Por ordem do que julgo mais facil e importante:
 
-1. Automacao de update do .ini
 1. Backup do save no S3
-2. Retorno do ip do server no discord
-3. Arrumar reset do reveal map toda vez que desloga
-4. Acesso envio de mais comandos para o terminal do server (Talvez uma UI para melhor visualizacao?)
+2. Acesso envio de mais comandos para o terminal do server (Talvez uma UI para melhor visualizacao?)
