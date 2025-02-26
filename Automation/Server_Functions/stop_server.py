@@ -4,7 +4,7 @@ import Utils.aws     as AWS
 import Utils.server  as SERVER
 from configs import load_config
 
-def stop_server_and_instnace() -> None:
+def stop_server_and_instance() -> None:
     """
     Para o servidor e depois a instância EC2.
     """
