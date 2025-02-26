@@ -5,13 +5,15 @@ from typing import Dict, Callable
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Automation.Server_Functions.initialize_server import initialize_instance
-from Automation.Server_Functions.stop_server import stop_server_and_instnace
+from Automation.Server_Functions.stop_server import stop_server_and_instance
+from Automation.Server_Functions.update_ini import update_ini
 
 USAGE_MESSAGE = "Uso: python main.py <start>||<stop>"
 UNKNOWN_COMMAND_MESSAGE = "Comando desconhecido: {}"
 COMMANDS: Dict[str, Callable] = {
     "start": initialize_instance,
-    "stop": stop_server_and_instnace,
+    "stop": stop_server_and_instance,
+    "update": update_ini
 }
 
 def main() -> None:
