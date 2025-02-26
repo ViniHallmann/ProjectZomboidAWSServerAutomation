@@ -1,16 +1,4 @@
-"""
-Adicionar o novo servertest.ini na instancia:
-	1. > sftp -i "CAMINHO PARA CHAVE .PEM" ubuntu@ipdamaquina
-		Exemplo: sftp -i "C:\Users\vinic\Desktop\pz-server-files-private\pz-server-key-pair.pem" ubuntu@18.231.109.208
-	2. > put CAMINHO DO servertest.ini PAGINA DESTINO
-		Exemplo: put C:/Users/vinic/Desktop/pz-server-files/servertest2.ini /home/ubuntu
-	3. sudo mv servertest2.ini mv servertest.ini
-	4. sudo mv servertest.ini ~/Zomboid/Server/
-
-    local_file_path = "C:/Users/vinic/Desktop/pz-server-files/servertest2.ini"
-    remote_temp_path = "/home/ubuntu/servertest2.ini"
-    remote_final_path = "/home/ubuntu/Zomboid/Server/servertest.ini"
-"""
+import os
 import boto3
 from botocore.client import BaseClient
 import Utils.aws     as AWS
@@ -21,7 +9,8 @@ def update_ini():
     config: dict = load_config()
     ec2: BaseClient = boto3.client("ec2")
     ssh = None
-    
+    sftp = None
+
     try:
         if not AWS.is_instance_running(ec2, config["INSTANCE_ID"]):
             print("Instância está parada.")
@@ -29,13 +18,18 @@ def update_ini():
         
         ip: str = AWS.get_instance_ip(ec2, config["INSTANCE_ID"])
         if ip == "IP não encontrado": raise ValueError("Não foi possível obter o IP da instância.")
- 
+
         ssh = SERVER.connect_ssh(ip, config["KEY_PATH"], config["USER"])
-        sftp = ssh.open_sftp()
+        print("Conectado ao servidor.")
         
-        sftp.put(config["INI_LOCAL_PATH"], config["INI_REMOTE_PATH"])
-        ssh.exec_command(f'sudo mv {config["INI_REMOTE_PATH"] + "/servertestnew.ini"} {config["INI_REMOTE_PATH"] + "/servertest.ini"}')
-        ssh.exec_command(f'sudo mv {config["INI_REMOTE_PATH"] + "/servertest.ini"} {config["INI_FINAL_PATH"]}')
+        sftp = ssh.open_sftp()
+        print("SFTP aberto.")
+        
+        sftp.put("C:/Users/vinic/Desktop/pz-server-files-public/Server.ini/servertestnew.ini", "/home/ubuntu/servertestnew.ini")
+        ssh.exec_command('sudo mv /home/ubuntu/servertestnew.ini /home/ubuntu/servertest.ini')
+        ssh.exec_command('sudo mv /home/ubuntu/servertest.ini /home/ubuntu/Zomboid/Server/')
+        print("Arquivo Server.ini atualizado.")
+
     except Exception as e:
         print(f"Erro: {e}")
 
