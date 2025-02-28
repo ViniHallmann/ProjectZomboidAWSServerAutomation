@@ -1,6 +1,7 @@
 import boto3
 from botocore.client import BaseClient
-import Utils.aws as AWS
+import Utils.aws    as AWS
+import Utils.server as SERVER
 from configs import load_config
 
 def initialize_instance() -> None:
@@ -26,3 +27,33 @@ def initialize_instance() -> None:
     except Exception as e:
         print(f"Erro ao inicializar instância: {e}")
         return None, None
+
+def start_server() -> None:
+    """
+    Para o servidor do zomboid.
+    """
+    config: dict = load_config()
+    ec2: BaseClient = boto3.client("ec2")
+    ssh = None
+
+    try:
+        if not AWS.is_instance_running(ec2, config["INSTANCE_ID"]):
+            print("Instância está parada.")
+            return
+        
+        ip: str = AWS.get_instance_ip(ec2, config["INSTANCE_ID"])
+        if ip == "IP não encontrado": raise ValueError("Não foi possível obter o IP da instância.")
+ 
+
+        ###CRIAR COMANDO PARA VERIFICAR JANELA DO SERVIDOR ANTES
+        ssh = SERVER.connect_ssh(ip, config["KEY_PATH"], config["USER"])
+
+        SERVER.execute_command(ssh, config["START_COMMAND"])
+
+    except Exception as e:
+        print(f"Erro: {e}")
+
+    finally:
+        if ssh:
+            ssh.close()
+            print("Conexão encerrada.")
