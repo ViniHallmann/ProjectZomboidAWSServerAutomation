@@ -40,15 +40,19 @@ def start_server() -> None:
         if not AWS.is_instance_running(ec2, config["INSTANCE_ID"]):
             print("Instância está parada.")
             return
+        print("Instância está rodando.")
         
         ip: str = AWS.get_instance_ip(ec2, config["INSTANCE_ID"])
         if ip == "IP não encontrado": raise ValueError("Não foi possível obter o IP da instância.")
  
 
         ###CRIAR COMANDO PARA VERIFICAR JANELA DO SERVIDOR ANTES
+        print("Conectando ao servidor...")
         ssh = SERVER.connect_ssh(ip, config["KEY_PATH"], config["USER"])
 
-        SERVER.execute_command(ssh, config["START_COMMAND"])
+        print("Iniciando servidor...")
+        response = SERVER.execute_command(ssh, config["START_COMMAND"])
+        print(response)
 
     except Exception as e:
         print(f"Erro: {e}")

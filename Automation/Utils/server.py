@@ -20,6 +20,7 @@ def execute_command( ssh: paramiko.SSHClient, COMMAND: str ) -> None:
     """
     try:
         stdin, stdout, stderr = ssh.exec_command( COMMAND )
+        return stdout.read().decode()
     except Exception as e:
         print( f"Erro ao executar comando via SSH: {e}" )
         return None

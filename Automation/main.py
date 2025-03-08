@@ -4,12 +4,12 @@ import os
 from typing import Dict, Callable
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from Automation.Server_Functions.initialize_server import initialize_instance
-from Automation.Server_Functions.initialize_server import start_server
-from Automation.Server_Functions.stop_server import stop_server_and_instance
-from Automation.Server_Functions.stop_server import stop_server
-from Automation.Server_Functions.stop_server import stop_instance
-from Automation.Server_Functions.update_ini import update_ini
+from Automation.Server_Functions.start import initialize_instance
+from Automation.Server_Functions.start import start_server
+from Automation.Server_Functions.stop import stop_server_and_instance
+from Automation.Server_Functions.stop import stop_server
+from Automation.Server_Functions.stop import stop_instance
+from Automation.Server_Functions.update import update_ini
 
 USAGE_MESSAGE = """
 Uso: python main.py <comando> [opções]
@@ -20,7 +20,7 @@ Comandos disponíveis:
   terminate        - Para o servidor e a instância EC2
   stop-server      - Para apenas o servidor do Zomboid
   stop-instance    - Para apenas a instância EC2
-  update [caminho] - Atualiza o arquivo Server.ini (caminho opcional)
+  update           - Atualiza o arquivo Server.ini
 """
 UNKNOWN_COMMAND_MESSAGE = "Comando desconhecido: {}"
 COMMANDS: Dict[str, Callable] = {
