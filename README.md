@@ -60,7 +60,6 @@ Por fim rodar:
 ```bash
 python main.py update
 ```
-Este comando irá desligar o servidor do Project Zomboid e depois acabar com a execução da instância.
 
 ## **Como Configurar**
 Configurar AWS CLI: Após instalar a AWS CLI, execute aws configure e insira as credenciais da conta **pz-user-organizer**.
