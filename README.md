@@ -53,10 +53,7 @@ python main.py terminate
 Este comando irá desligar o servidor do Project Zomboid e depois acabar com a execução da instância.
 
 ## **Atualziar arquivo .ini do server**
-Quando quiser atualizar o servertest.ini como novos mods/configuracoes de servidor, basta executar o script main.py passando o argumento "update". Esse comando pegara o servernewtest.ini da pasta Server.ini e colocara dentro dos arquivos do servidor. Para isso o servidor precisa estar desligado(Usar 
-```bash
-python main.py stop-server
-``` antes)
+Quando quiser atualizar o servertest.ini como novos mods/configuracoes de servidor, basta executar o script main.py passando o argumento "update". Esse comando pegara o servernewtest.ini da pasta Server.ini e colocara dentro dos arquivos do servidor. Para isso o servidor precisa estar desligado(Usar python main.py stop-server antes)
 
 Por fim rodar:
 
