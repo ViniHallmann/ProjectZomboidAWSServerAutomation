@@ -25,7 +25,7 @@ def update_ini():
         sftp = ssh.open_sftp()
         print("SFTP aberto.")
         
-        sftp.put("C:/Users/vinic/Desktop/pz-server-files-public/Server.ini/servertestnew.ini", "/home/ubuntu/servertestnew.ini")
+        sftp.put("D:/Programação/Server/ProjectZomboidAWSServerAutomation/Server.ini/servertestnew.ini", "/home/ubuntu/servertestnew.ini")
         ssh.exec_command('sudo mv /home/ubuntu/servertestnew.ini /home/ubuntu/servertest.ini')
         ssh.exec_command('sudo mv /home/ubuntu/servertest.ini /home/ubuntu/Zomboid/Server/')
         print("Arquivo Server.ini atualizado.")
